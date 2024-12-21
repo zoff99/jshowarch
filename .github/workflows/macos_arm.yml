@@ -1,4 +1,4 @@
-name: macos
+name: macos-arm
 
 on:
   push:
@@ -20,8 +20,8 @@ defaults:
 jobs:
 
   test-macos:
-    name: macOS test
-    runs-on: macos-13
+    name: MacOS-arm test
+    runs-on: macos-14
     permissions:
       contents: write
     steps:
@@ -49,13 +49,13 @@ jobs:
 
       - name: run
         run:  |
-          screencapture -T 5 -x -t png /Users/runner/screenshot-macos.png &
+          screencapture -T 5 -x -t png /Users/runner/screenshot-macos-14.png &
           java jshowarch &
           sleep 5
 
       - name: upload-screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: screenshot-macos
+          name: screenshot-macos-arm
           path: |
             /Users/runner/screen*.png

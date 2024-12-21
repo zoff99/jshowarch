@@ -1,0 +1,70 @@
+name: windows
+
+on:
+  push:
+    paths-ignore:
+     - 'README.md'
+  pull_request:
+    paths-ignore:
+     - 'README.md'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: dummy
+        default: dummy
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  test-macos:
+    name: Windows test
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: |
+            17
+
+      - name: compile
+        shell: bash
+        run:  |
+          javac -Xlint:deprecation jshowarch.java
+
+      - name: run
+        shell: bash
+        run:  |
+          java jshowarch &
+          sleep 5
+
+      - name: capture-screen
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.Windows.Forms
+          Add-Type -AssemblyName System.Drawing
+          $Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+          $Width  = $Screen.Width
+          $Height = $Screen.Height
+          $Left   = $Screen.Left
+          $Top    = $Screen.Top
+          $bitmap  = New-Object System.Drawing.Bitmap $Width, $Height
+          $graphic = [System.Drawing.Graphics]::FromImage($bitmap)
+          $graphic.CopyFromScreen($Left, $Top, 0, 0, $bitmap.Size)
+          $bitmap.Save("D:\a\jshowarch\jshowarch\screenshot-windows.png")
+          Write-Output "Screenshot saved to:"
+          Write-Output D:\a\jshowarch\jshowarch\screenshot-windows.png
+
+      - name: upload-screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshot-windows
+          path: |
+            D:\a\jshowarch\jshowarch\screenshot-windows.png
