@@ -27,6 +27,18 @@ public class jshowarch
       {
         if (argv.length > 0)
         {
+          // cmd line args need to be: xpos ypos width height fontsize
+          // in this order!
+          startx = Integer.valueOf(argv[0]);
+          System.out.println("argv[0]=" + argv[0]);
+          starty = Integer.valueOf(argv[1]);
+          System.out.println("argv[1]=" + argv[1]);
+          width = Integer.valueOf(argv[2]);
+          System.out.println("argv[2]=" + argv[2]);
+          height = Integer.valueOf(argv[3]);
+          System.out.println("argv[3]=" + argv[3]);
+          fontsize = Integer.valueOf(argv[4]);
+          System.out.println("argv[4]=" + argv[4]);
         }
       }
       catch(Exception e)
