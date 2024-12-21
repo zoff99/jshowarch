@@ -1,0 +1,20 @@
+name: Nightly
+
+on:
+  push:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  update-nightly-tag:
+    name: Update nightly release tag
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    permissions:
+        contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Move nightly tag to head for nightly release
+        run: git tag -f nightly && git push origin nightly -f
