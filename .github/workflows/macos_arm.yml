@@ -71,5 +71,5 @@ jobs:
           prerelease: true
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "screenshot-macos-14.png"
+          artifacts: "/Users/runner/screenshot-macos-14.png"
 
