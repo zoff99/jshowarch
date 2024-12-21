@@ -50,7 +50,7 @@ jobs:
       - name: run
         run:  |
           screencapture -T 5 -x -t png /Users/runner/screenshot-macos.png &
-          java jshowarch &
+          java jshowarch 300 200 200 90 42 &
           sleep 5
 
       - name: upload-screenshots

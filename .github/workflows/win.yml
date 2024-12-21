@@ -42,7 +42,7 @@ jobs:
       - name: run
         shell: bash
         run:  |
-          java jshowarch &
+          java jshowarch 300 200 200 90 42 &
           sleep 5
 
       - name: capture-screen
