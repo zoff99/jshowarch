@@ -15,6 +15,7 @@ public class jshowarch
 
     public static void main(String argv[])
     {
+      System.out.println("jshowarch:starting ...");
       Frame f = new Frame("jshowarch");
 
       f.addWindowListener(
@@ -30,15 +31,15 @@ public class jshowarch
           // cmd line args need to be: xpos ypos width height fontsize
           // in this order!
           startx = Integer.valueOf(argv[0]);
-          System.out.println("argv[0]=" + argv[0]);
+          System.out.println("jshowarch:argv[0]=" + argv[0]);
           starty = Integer.valueOf(argv[1]);
-          System.out.println("argv[1]=" + argv[1]);
+          System.out.println("jshowarch:argv[1]=" + argv[1]);
           width = Integer.valueOf(argv[2]);
-          System.out.println("argv[2]=" + argv[2]);
+          System.out.println("jshowarch:argv[2]=" + argv[2]);
           height = Integer.valueOf(argv[3]);
-          System.out.println("argv[3]=" + argv[3]);
+          System.out.println("jshowarch:argv[3]=" + argv[3]);
           fontsize = Integer.valueOf(argv[4]);
-          System.out.println("argv[4]=" + argv[4]);
+          System.out.println("jshowarch:argv[4]=" + argv[4]);
         }
       }
       catch(Exception e)
@@ -71,5 +72,6 @@ public class jshowarch
       f.setLocation(startx, starty);
       f.setSize(width, height);
       f.setVisible(true);
+      System.out.println("jshowarch:widget ready.");
     }
 }
