@@ -43,6 +43,8 @@ public class jshowarch
       };
       text.setEditable(false);
       text.setHorizontalAlignment(JTextField.CENTER);
+      Color color_transparent = new Color(0, 0, 0, 0);
+      text.setBackground(color_transparent);
 
       String or_arch = System.getProperty("os.arch");
 
