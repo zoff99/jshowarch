@@ -59,3 +59,17 @@ jobs:
           name: screenshot-macos
           path: |
             /Users/runner/screen*.png
+
+      - name: Upload to nightly release
+        uses: ncipollo/release-action@v1
+        if: github.ref == 'refs/heads/master'
+        with:
+          allowUpdates: true
+          tag: nightly
+          omitBodyDuringUpdate: true
+          omitNameDuringUpdate: true
+          prerelease: true
+          replacesArtifacts: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "/Users/runner/screenshot-macos.png"
+
