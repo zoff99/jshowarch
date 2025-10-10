@@ -12,6 +12,7 @@ public class jshowarch
     static int width = 400;
     static int height = 200;
     static int fontsize = 30;
+    static int full_output = 0;
 
     public static void main(String argv[])
     {
@@ -40,33 +41,63 @@ public class jshowarch
           System.out.println("jshowarch:argv[3]=" + argv[3]);
           fontsize = Integer.valueOf(argv[4]);
           System.out.println("jshowarch:argv[4]=" + argv[4]);
+          full_output = Integer.valueOf(argv[5]);
+          System.out.println("jshowarch:argv[5]=" + argv[5]);
         }
       }
       catch(Exception e)
       {
       }
 
+      Color color_transparent = new Color(0, 0, 0, 0);
+
       JPanel p = new JPanel(); 
-      p.setLayout(new GridBagLayout());
+
+      GridBagLayout gbl = new GridBagLayout();
+      GridBagConstraints gbc = new GridBagConstraints();
+      gbl.setConstraints(p, gbc);
+      p.setLayout(gbl);
 
       JTextField text = new JTextField() {
         @Override public void setBorder(Border border) {
             // No Border
         }
       };
+      JTextField text2 = new JTextField() {
+        @Override public void setBorder(Border border) {
+            // No Border
+        }
+      };
+
       text.setEditable(false);
       text.setHorizontalAlignment(JTextField.CENTER);
-      Color color_transparent = new Color(0, 0, 0, 0);
       text.setBackground(color_transparent);
 
+      text2.setEditable(false);
+      text2.setHorizontalAlignment(JTextField.CENTER);
+      text2.setBackground(color_transparent);
+
       String or_arch = System.getProperty("os.arch");
+      String or_name = System.getProperty("os.name");
+      String or_version = System.getProperty("os.version");
 
       Font font1 = new Font("Verdana", Font.BOLD, fontsize);
       text.setFont(font1);
+      text2.setFont(font1);
 
       text.setText(or_arch);
+      if (full_output == 1) {
+        text2.setText(or_name + " " + or_version);
+      }
 
-      p.add(text, new GridBagConstraints());
+      gbc.gridx = 0;
+      gbc.gridy = 0;
+      p.add(text, gbc);
+      if (full_output == 1) {
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        p.add(text2, gbc);
+      }
 
       f.add(p);
       f.setLocation(startx, starty);
